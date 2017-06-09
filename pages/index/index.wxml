@@ -1,0 +1,5 @@
+<!--index.wxml-->
+
+<button bindtap="store_list">换电站列表</button>
+
+<map markers="{{markers}}" show-location include-points="{{points}}" class="map"></map>

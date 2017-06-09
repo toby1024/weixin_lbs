@@ -1,0 +1,12 @@
+<template name="power_store">
+  <view class="store_list">
+    <text> {{ item.name }} </text>
+    <view class="float_right">
+      <text> 距离：{{ item.distance }}</text>
+      <button type="primary" class="navigate" size="mini" data-address="{{ item.address }}" data-lat="{{ item.latitude }}" data-lng="{{ item.longitude }}" bindtap="navigate_to">导航</button>
+    </view>
+  </view>
+  <view class="store_list address">
+    <text>{{ item.address }}</text>
+  </view>
+</template>

@@ -1,0 +1,7 @@
+<!--store_list.wxml-->
+<import src="../templates/stores.wxml" />
+<button bindtap="store_map">换电站地图</button>
+
+<block wx:for="{{ storeList }}">
+  <template is="power_store" data="{{ item }}"></template>
+</block>

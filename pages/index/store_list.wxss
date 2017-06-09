@@ -1,0 +1,19 @@
+/* store_list.wxss */
+.store_list {
+  text-align: left;
+  margin-left: 10px;
+  margin-bottom: 5px;
+  font-size: 15px;
+}
+.float_right {
+  float: right;
+  margin-right: 10px;
+}
+.address {
+  font-size: 10px;
+  margin-bottom: 20px;
+}
+.navigate {
+  font-size: 15px;
+  margin-left: 5px;
+}
