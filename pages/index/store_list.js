@@ -6,7 +6,7 @@ Page({
    */
   data: {
     baidu_map_url: 'https://api.map.baidu.com/routematrix/v2/driving',
-    baidu_map_ak: '百度地图ak',
+    baidu_map_ak: 'veaxjgP10QaIwPkU5MV3ZCc0eMNM44W5',
     latitude: '0',
     longitude: '0',
     message: '',

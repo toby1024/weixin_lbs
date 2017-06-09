@@ -9,7 +9,7 @@ Page({
     storeList: [],
     markers: [],
     points: [],
-    query_store_url: '数据接口接口url'
+    query_store_url: 'http://battery.skio.cn/power_stores'
   },
   //事件处理函数
   bindViewTap: function () {
