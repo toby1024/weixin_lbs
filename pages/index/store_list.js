@@ -7,8 +7,6 @@ Page({
   data: {
     baidu_map_url: 'https://api.map.baidu.com/routematrix/v2/driving',
     baidu_map_ak: 'veaxjgP10QaIwPkU5MV3ZCc0eMNM44W5',
-    latitude: '0',
-    longitude: '0',
     message: '',
     storeList: [],
     distance_datas: []
@@ -38,9 +36,12 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    wx.getLocation({
+    var location = '';
+
+    wx.getStorage({
+      key: 'location',
       success: function (res) {
-        that.setData({ latitude: res.latitude, longitude: res.longitude })
+        location = res.data
       }
     })
 
@@ -59,26 +60,25 @@ Page({
           url: that.data.baidu_map_url,
           data: {
             output: 'json',
-            origins: that.data.latitude + ',' + that.data.longitude,
+            origins: location ,
             ak: that.data.baidu_map_ak,
             destinations: target
           },
           header: { 'content-type': 'application/json'},
           method: 'get',
           success: function (res) {
-            console.log(res.data)
-            that.setData({ distance_datas: res.data })
+            console.log(res.data.result)
+            var baidu_distance = res.data.result
+            var datas = []
+            for (var i = 0; i < stores.length; i++) {
+              var tmp = stores[i]
+              tmp.distance = baidu_distance[i].distance.text
+              datas.push(tmp)
+            }
+            that.setData({ distance_datas: res.data, storeList: datas  })
           },
         })
 
-        var distance_datas = that.data.distance_datas
-        var datas = []
-        for (var i = 0; i < stores.length; i++) {
-          var tmp = stores[i]
-          // tmp.distance = distance_datas[i].text
-          datas.push(tmp)
-        }
-        that.setData({ storeList: datas })
       },
       fail: function (res) { that.setData({ message: '获取换电站信息失败' }) },
     })

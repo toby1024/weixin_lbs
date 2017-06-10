@@ -4,12 +4,10 @@ var app = getApp()
 Page({
   data: {
     userInfo: {},
-    latitude: '0',
-    longitude: '0',
     storeList: [],
     markers: [],
     points: [],
-    query_store_url: 'http://battery.skio.cn/power_stores'
+    query_store_url: '获取数据url'
   },
   //事件处理函数
   bindViewTap: function () {
@@ -33,7 +31,10 @@ Page({
     })
     wx.getLocation({
       success: function (res) {
-        that.setData({ latitude: res.latitude, longitude: res.longitude })
+        wx.setStorage({
+          key: "location",
+          data: res.latitude + ',' + res.longitude
+        })
       }
     })
 
@@ -46,14 +47,13 @@ Page({
         console.log(stores)
         var store_list = []
         var points = []
-        var markers = []
+
         for (var i = 0; i < stores.length; i++) {
           var tmp = stores[i]
           store_list.push({ name: tmp.name, address: tmp.address, distance: i, latitude: tmp.latitude, longitude: tmp.longitude })
           points.push({ latitude: tmp.latitude, longitude: tmp.longitude })
-          markers.push({ latitude: tmp.latitude, longitude: tmp.longitude })
         }
-        that.setData({ markers: markers, points: points })
+        that.setData({ markers: points, points: points })
         wx.setStorage({
           key: 'power_stores',
           data: store_list,
